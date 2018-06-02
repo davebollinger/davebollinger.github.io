@@ -20,10 +20,20 @@ local myOutputGroup = display.newGroup()
 
 Create an instance of the shader, passing it references to the two groups:
 ```lua
-local tvshader = TVShader({ contentGroup=myContentGroup, outputGroup=myOutputGroup })
+local tvshader = TVShader({
+  contentGroup = myContentGroup,
+  outputGroup = myOutputGroup
+})
 ```
 
-That's basically it.  The effect will now be active, but there won't be much visual difference, because the content group is still empty - there's nothing yet for the effect to operate on.  So simply add your desired content to the content group and the effect will begin processing it.
+That's basically it.
 
+The effect will now be active, but only a bit of interference lines will be visible on the otherwise blank screen.
 
-
+In order to actually _notice_ the effect it would help to have some actual content within the content group, even a simple square will do...
+```lua
+local rect = display.newRect( contentGroup,
+  display.contentCenterX, display.contentCenterY,
+  200, 200 )
+```
+![](tvshader_demo0docs.jpg)
