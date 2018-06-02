@@ -45,3 +45,4 @@ For this demo, since the contentGroup was originally created in the display's pr
 ```lua
 tvshader:destroy( display.getCurrentStage() )
 ```
+_The TVShader module intentionally does not try to automatically save and restore the contentGroup's parent, that task is left to you, for reliability reasons, but you have the source code... you may change that behaviour if you find it more convenient._
