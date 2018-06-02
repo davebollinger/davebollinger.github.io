@@ -4,8 +4,9 @@
 
 ![](tvshader_beachballdemo.jpg)
 
-[TVShader API](TVShader_API.md)
-[TVShader_Notes](TVShader_Notes.md)
+[TVShader API](TVShaderAPI)
+
+[TVShader_Notes](TVShaderNotes)
 
 # Basic Usage
 
