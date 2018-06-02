@@ -6,7 +6,7 @@
 
 [TVShader API](TVShaderAPI.md)
 
-[TVShader_Notes](TVShaderNotes.md)
+[TVShader Usage Notes](TVShaderNotes.md)
 
 # Basic Usage
 
