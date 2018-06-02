@@ -1,10 +1,15 @@
+# Introduction
+
 "TVShader" is a shader for Corona SDK that implements old-school style CRT effects.  It is intended for use when a full-screen effect is desired.  (It is not appropriate for filter-style use on non-full-screen areas.)
 
 ![](tvshader_beachballdemo.jpg)
 
+[TVShader API](TVShader_API.md)
+[TVShader_Notes](TVShader_Notes.md)
+
 # Basic Usage
 
-Copy the TVShader.lua module into your project folder.  You may also copy it into a subdirectory of your project folder, though you'll need to account for that path in the sample code below.
+Copy the TVShader.lua module into your project folder.  (You may also copy it into any desired subdirectory of your project folder - you'd just need to account for that path in the sample code below.)
 
 Require the TVShader module within your code where it will be used.
 ```lua
@@ -29,7 +34,7 @@ That's basically it.
 
 The effect will now be active, but only a bit of interference lines will be visible on the otherwise blank screen.
 
-In order to actually _notice_ the effect it would help to have some actual content within the content group, even a simple square will do...
+In order to actually _notice_ the effect it would help to have some actual content within the content group.  Even a simple square will do...
 ```lua
 local rect = display.newRect( contentGroup,
   display.contentCenterX, display.contentCenterY,
