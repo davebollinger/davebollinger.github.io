@@ -13,15 +13,15 @@ local TVShader = require("TVShader")
 
 Create two display groups - one to hold the original "contents" of your display, and one to hold the output from the effect.
 ```lua
-local myContentGroup = display.newGroup()
-local myOutputGroup = display.newGroup()
+local contentGroup = display.newGroup()
+local outputGroup = display.newGroup()
 ```
 
 Create an instance of the shader, passing it references to the two groups:
 ```lua
 local tvshader = TVShader({
-  contentGroup = myContentGroup,
-  outputGroup = myOutputGroup
+  contentGroup = contentGroup,
+  outputGroup = outputGroup
 })
 ```
 
@@ -41,7 +41,7 @@ Turning the effect off is accomplished by destroying the instance.
 
 The destroy method takes an optional parameter of a display group to which it should "return" the original contentGroup.
 
-For this demo, the appropriate group to return the contentGroup to is the display's primary stage...
+For this demo, since the contentGroup was originally created in the display's primary stage, that would also be the appropriate group to return it to...
 ```lua
 tvshader:destroy( display.getCurrentStage() )
 ```
