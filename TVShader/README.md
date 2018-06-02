@@ -2,8 +2,7 @@
 
 ![](tvshader_beachballdemo.jpg)
 
-
-#Basic Usage
+# Basic Usage
 
 Copy the TVShader.lua module into your project folder.  You may also copy it into a subdirectory of your project folder, though you'll need to account for that path in the sample code below.
 
@@ -37,3 +36,12 @@ local rect = display.newRect( contentGroup,
   200, 200 )
 ```
 ![](tvshader_demo0docs.jpg)
+
+Turning the effect off is accomplished by destroying the instance.
+
+The destroy method takes an optional parameter of a display group to which it should "return" the original contentGroup.
+
+For this demo, the appropriate group to return the contentGroup to is the display's primary stage...
+```lua
+tvshader:destroy( display.getCurrentStage() )
+```
