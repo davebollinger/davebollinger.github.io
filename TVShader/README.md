@@ -2,11 +2,7 @@
 
 ![](tvshader_beachballdemo.jpg)
 
-second one:
 
-![](https://github.com/davebollinger/davebollinger.github.io/blob/master/TVShader/tvshader_beachballdemo.jpg)
-
-post-image
 
 
 
