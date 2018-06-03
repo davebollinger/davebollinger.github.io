@@ -1,6 +1,6 @@
 ## Quick Start Guide
 
-# Enabling the Effect
+### Enabling the Effect
 
 Copy the TVShader.lua module into your project folder.  (You may also copy it into any desired subdirectory of your project folder - you'd just need to account for that path in the sample code below.)
 
@@ -35,7 +35,7 @@ local rect = display.newRect( contentGroup,
 ```
 ![](tvshader_demo0docs.jpg)
 
-# Disabling the Effect
+### Disabling the Effect
 
 Turning the effect off is accomplished by destroying the instance.
 
