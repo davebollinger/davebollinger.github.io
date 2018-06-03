@@ -9,17 +9,17 @@ Require the TVShader module within your code where it will be used.
 local TVShader = require("TVShader")
 ```
 
-Create two display groups - one to hold the original "contents" of your display, and one to hold the output from the effect.
+Create two display groups - one to hold the original contents of your display, and one to hold the output from the effect.
 ```lua
 local contentGroup = display.newGroup()
-local outputGroup = display.newGroup()
+local effectGroup = display.newGroup()
 ```
 
 Create an instance of the shader, passing it references to the two groups:
 ```lua
 local tvshader = TVShader({
   contentGroup = contentGroup,
-  outputGroup = outputGroup
+  effectGroup = effectGroup
 })
 ```
 
