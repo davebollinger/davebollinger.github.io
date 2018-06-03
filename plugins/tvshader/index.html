@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>TVShader - DBDocs</title>
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../css/highlight.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../../js/jquery-1.10.2.min.js"></script>
+        <script src="../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../js/highlight.pack.js"></script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../..">DBDocs</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                    <li >
+                        <a href="../..">Home</a>
+                    </li>
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Plugins <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li class="active">
+    <a href="./">TVShader</a>
+</li>
+                        </ul>
+                    </li>
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                    <li >
+                        <a rel="next" href="../..">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li class="disabled">
+                        <a rel="prev" >
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#tvshader">TVShader</a></li>
+            <li><a href="#introduction">Introduction</a></li>
+            <li><a href="#quick-start">Quick Start</a></li>
+            <li><a href="#api-reference">API Reference</a></li>
+            <li><a href="#limitations-caveats">Limitations / Caveats</a></li>
+            <li><a href="#demos">Demos</a></li>
+            <li><a href="#source-code">Source Code</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="tvshader">TVShader</h1>
+<h2 id="introduction">Introduction</h2>
+<p>"TVShader" is a shader for Corona SDK that implements old-school style CRT effects.</p>
+<p>It is intended for use when a full-screen "retro" effect is desired.</p>
+<p><img alt="" src="./tvshader_beachballdemo.jpg" /></p>
+<p>There are multiple aspects to the effect, including pincushion bulge, contrast and vignetting, color fringe separation (beam misalignment), scanlines, interference, tint, and flicker.</p>
+<p>It is available from the <a href="https://marketplace.coronalabs.com/">Corona Marketplace</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2 id="quick-start">Quick Start</h2>
+<h3 id="enabling-the-effect">Enabling the Effect</h3>
+<p>Copy the TVShader.lua module into your project folder.  (You may also copy it into any desired subdirectory of your project folder - you'd just need to account for that path in the sample code below.)</p>
+<p>Require the TVShader module within your code where it will be used.</p>
+<pre><code class="lua">local TVShader = require(&quot;TVShader&quot;)
+</code></pre>
+
+<p>Create two display groups - one to hold the original contents of your display, and one to hold the output from the effect.</p>
+<pre><code class="lua">local contentGroup = display.newGroup()
+local effectGroup = display.newGroup()
+</code></pre>
+
+<p>Create an instance of the shader, passing it references to the two groups:</p>
+<pre><code class="lua">local tvshader = TVShader({
+  contentGroup = contentGroup,
+  effectGroup = effectGroup
+})
+</code></pre>
+
+<p>That's basically it.</p>
+<p>The effect will now be active, but only a bit of interference lines will be visible on the otherwise blank screen.</p>
+<h3 id="giving-the-effect-something-to-process">Giving the Effect Something To Process</h3>
+<p>In order to actually <em>notice</em> the effect it would help to have some actual content to receive the effect.
+Any display objects added to the contentGroup will be processed by the effect.</p>
+<p>For these purposes, a simple square will do...</p>
+<pre><code class="lua">local rect = display.newRect( contentGroup, 240, 160, 200, 200 )
+rect:setFillColor(0.8)
+</code></pre>
+
+<p><img alt="" src="./tvshader_demo0docs.jpg" /></p>
+<h3 id="disabling-the-effect">Disabling the Effect</h3>
+<p>Turning the effect off is accomplished by destroying the instance.</p>
+<pre><code class="lua">tvshader:destroy()
+</code></pre>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2 id="api-reference">API Reference</h2>
+<h3 id="tvshaderparams">TVShader(params)</h3>
+<p>Creates an instance of the TVShader.  Once created, an instance of the shader is immediately active.</p>
+<p>This function takes a single argument, <em>params</em>, a table that accepts the following parameters:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Req/Opt</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>contentGroup</td>
+<td>Display Group</td>
+<td>Required</td>
+<td>A reference to a display group that contains the source content to be processed by the effect.</td>
+</tr>
+<tr>
+<td>effectGroup</td>
+<td>Display Group</td>
+<td>Required</td>
+<td>A reference to a display group that will contain the output of the effect.  The effectGroup should be empty.</td>
+</tr>
+<tr>
+<td>staticContent</td>
+<td>Boolean</td>
+<td>Optional</td>
+<td>A boolean indicating if the contents of the contentGroup are static (true) or animated (false, default).  If the contents are static, then setting this value to true may improve overall performance.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example:</strong> (dynamic/animated content)</p>
+<pre><code class="lua">local tvshader = TVShader({
+  contentGroup = myContentGroup,
+  effectGroup = myEffectGroup,
+})
+</code></pre>
+
+<p><strong>Example:</strong> (static content)</p>
+<pre><code class="lua">local tvshader = TVShader({
+  contentGroup = myContentGroup,
+  effectGroup = myEffectGroup,
+  staticContent = true
+})
+</code></pre>
+
+<p><strong>Notes:</strong></p>
+<p>The contentGroup should be properly "layered" (ie, inserted into an appropriate parent group) in the display heirarchy prior to being assigned to the effect.</p>
+<p>The contentGroup will be removed from its current parent group to prevent rendering of the un-effect-ed content.</p>
+<p>The contents of the contentGroup may be altered after having been assigned to the shader.  You may insert new display objects into the contentGroup, or remove existing objects.  Any objects in the contentGroup will receive the effect.</p>
+<p>However, if you create an instance with staticContent=true, then <em>later</em> add elements to the contentGroup (thus it is <em>non</em>-static), you must manually invalidate (see below) the effect in order to see those changes.</p>
+<p>Note that the contentGroup <em>itself</em> should not be altered after having been assigned to the shader.  For instance, you should not attempt to insert the contentGroup into some other parent group while it is in use by the shader.</p>
+<p>&nbsp;</p>
+<h3 id="instanceinvalidate"><em>instance</em>:invalidate()</h3>
+<p>Manually refreshes the offscreen texture to reflect the current contents of the contentGroup.</p>
+<p>This function takes no arguments.</p>
+<p><strong>Example:</strong></p>
+<pre><code class="lua">tvshader:invalidate()
+</code></pre>
+
+<p>Typically only needed if the instance was created with staticContent=true, yet some later change <em>does</em> occur to the contentGroup that you wish to be reflected in the effect.</p>
+<p>If the instance was created with staticContent=false (the default) then any changes to the contents of the contentGroup will be automatically reflected in the effect, thus this method will not be needed.</p>
+<p>&nbsp;</p>
+<h3 id="instancedestroy"><em>instance</em>:destroy()</h3>
+<p>Destroys an instance of the TVShader.  Once destroyed, an instance of the shader is immediately deactivated.  The contentGroup is returned to it's original parent.</p>
+<p>This function takes no arguments.</p>
+<p><strong>Example:</strong> (typical)</p>
+<pre><code class="lua">tvshader:destroy()
+</code></pre>
+
+<p>This function returns a single value - a reference to the original contentGroup.  This value is typically not needed as long as the original display heirarchy exists as it did at the time the shader was created.</p>
+<p>However, if the display heirarchy has changed such that the original parent of the contentGroup is no longer a suitable location to restore the contentGroup to, you may use the return value to insert the contentGroup into some <em>other</em> parent group.</p>
+<p><strong>Example:</strong> (using the return value)</p>
+<pre><code class="lua">  scene.view:insert( tvshader:destroy() )
+</code></pre>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2 id="limitations-caveats">Limitations / Caveats</h2>
+<h3 id="performance-considerations">Performance Considerations</h3>
+<p>This effect is achieved by rendering the contentGroup to an offscreem texture, then applying that texture to a rectangle in the outputGroup.</p>
+<p>This results in non-trivial performance implications.</p>
+<p>GPU texture memory will be allocated for the offscreen texture into which the contentGroup is rendered.</p>
+<p>GPU load will increase due to the effective double-rendering of the contentGroup.  This will be more pronounced when the contents of
+the contentGroup are dynamic (ie, staticContent=false was passed, or defaulted, during instance creation).</p>
+<p>You should performance test this effect on target devices.</p>
+<p>&nbsp;</p>
+<h3 id="display-quality-considerations">Display Quality Considerations</h3>
+<p>As a trade-off to the above performance considerations, texture memory is limited to content resolutions.</p>
+<p>This may cause a degredation in display quality if you are running on a high-resolution / high-density device with significantly lower content dimensions.</p>
+<p>This is partially mitigated by the fact that this effect is <em>intended</em> to simulate a poor-quality display device.  That is, you may actually
+find this behavior <em>beneficial</em>.</p>
+<p>&nbsp;</p>
+<h3 id="user-interface-elements">User Interface Elements</h3>
+<p>This is a visual-only effect -- user interface elements requiring touch events should not be part of the content group.  Touch events will
+not propogate through the effect output to the individual children of the group, including user interface elements.</p>
+<p>This is typically not a practical limitation, as you probably won't <em>want</em> user interface elements effected (<em>sic</em>).   User interface elements would
+behave unusually even if they <em>were</em> able to receive touch events while subject to the effect, due to the pincushion displacement of the effect - the
+actual touch bounds of such user interface elements would not coincide with their pincushioned display.</p>
+<p>However, it is possible, with a bit of clever coding, to create <em>two sets</em> of user interface elements - one visible and effected, one invisible
+and not effected -- if you are determined to have effected user interface elements, and can tolerate the slight visual misrepresentation of their
+pincushioned location.  It will be up to you to keep the visual element in sync with the invisible and touch-able element.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2 id="demos">Demos</h2>
+<p>The distribution file includes several demos, ranging from very-simple to more-complex usage.</p>
+<p><strong>BeachBallDemo</strong> is illustrated above in the Introduction section.</p>
+<p><strong>Demo0_FromDocs</strong> is illusated above in the Quick Start section.</p>
+<p><strong>Demo1_Simplest</strong> presents simple static content usage.</p>
+<p><strong>Demo2_SimplestToggled</strong> builds on Demo1_Simplest, and toggles the effect on/off via a timer.</p>
+<p><strong>Demo3_Fishies</strong> borrows from Corona's "Fishies" sample to illustrate dynamic content, and how to go about "patching" an existing project to use the effect.
+(some extraneous details from the original Fishies sample are excluded, specifically orientation support)</p>
+<p><strong>Demo4_Clock</strong> borrows from Corona's "Clock" sample to illustrate dynamic content AND non-effected UI elements.</p>
+<p><strong>Demo5_Composer</strong> borrows from Corona's "Composer" sample to illustrate multiple instances of the effect, as well as proper timing for their creation/destruction
+when used with Composer.</p>
+<p>All demos were last tested against Daily Build 3310.</p>
+<p><img alt="" src="./tvshader_demo4clock.jpg" /><img alt="" src="./tvshader_demo5composer.jpg" /></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2 id="source-code">Source Code</h2>
+<p>The distribution file includes full source code.  It's only around 200 lines of commented code -- you should expect about a ten minute read (depending on your
+background) to obtain a reasonable understanding of its inner workings.</p>
+<p>Source code is provided mainly for those wishing to alter the shader kernel internals.  There are far too many potential variables to pass them as run-time
+parameters to the shader, for practical purposes anway, so the shader's kernel is "hard-coded".  For example, you may wish to disable the pincushion effect,
+or increase the intensity of the flicker effect, or alter the color tint, et cetera - all of which are clearly indicated by comments.</p>
+<p>If you wish, you may even alter the kernel to such an extent as to create an entirely new class of shader.</p>
+<p>Just keep in mind the <a href="https://marketplace.coronalabs.com/eula">Market's EULA</a> regarding redistribution of any such modifications, other than as incorporated
+into your own applications.</p>
+<p>Source code is also provided in lieu of warranty.  If you discover a bug or other flaw in the code, please feel free to advise me and I'll make best efforts
+to rectify it.  But in the mean time, you yourself have the ability to do so as well.  I myself hate waiting for resolutions of closed-source bugs, so I don't
+wish to perpetuate that problem.</p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>var base_url = '../..';</script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/require.js"></script>
+        <script src="../../search/search.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td><kbd>&larr;</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td><kbd>&rarr;</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    </body>
+</html>
