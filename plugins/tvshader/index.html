@@ -231,10 +231,12 @@ the contentGroup are dynamic (ie, staticContent=false was passed, or defaulted, 
 <p>You should performance test this effect on target devices.</p>
 <p>&nbsp;</p>
 <h3 id="display-quality-considerations">Display Quality Considerations</h3>
-<p>As a trade-off to the above performance considerations, texture memory is limited to content resolutions.</p>
-<p>This may cause a degredation in display quality if you are running on a high-resolution / high-density device with significantly lower content dimensions.</p>
-<p>This is partially mitigated by the fact that this effect is <em>intended</em> to simulate a poor-quality display device.  That is, you may actually
-find this behavior <em>beneficial</em>.</p>
+<p>Correction:  The information below was written before the initial release of TVShader, and does not conform to the code as written.  (rather, it conforms to an unreleased internal version)</p>
+<p>As written, TVShader runs at native device resolution, so 'quality' as described below should not be a concern.  (texture memory usage, as above, does still remain a concern)</p>
+<p><del>As a trade-off to the above performance considerations, texture memory is limited to content resolutions.</del></p>
+<p><del>This may cause a degredation in display quality if you are running on a high-resolution / high-density device with significantly lower content dimensions.</del></p>
+<p><del>This is partially mitigated by the fact that this effect is <em>intended</em> to simulate a poor-quality display device.  That is, you may actually
+find this behavior <em>beneficial</em>.</del></p>
 <p>&nbsp;</p>
 <h3 id="user-interface-elements">User Interface Elements</h3>
 <p>This is a visual-only effect -- user interface elements requiring touch events should not be part of the content group.  Touch events will
