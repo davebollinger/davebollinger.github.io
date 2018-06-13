@@ -247,6 +247,9 @@ actual touch bounds of such user interface elements would not coincide with thei
 <p>However, it is possible, with a bit of clever coding, to create <em>two sets</em> of user interface elements - one visible and effected, one invisible
 and not effected -- if you are determined to have effected user interface elements, and can tolerate the slight visual misrepresentation of their
 pincushioned location.  It will be up to you to keep the visual element in sync with the invisible and touch-able element.</p>
+<p>Another approach that can work is to manually "trap" and "redispatch" touch events.  The general idea is to create a single invisible full-screen
+rectangle to accept all touch/tap events, then manually bounds-check the elements of the offscreen contentGroup and redispatch those events to the
+individual elements.  Sample code is available from github as <a href="https://github.com/davebollinger/TVShader_TouchSupport">TVShader_TouchSupport</a>.</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <h2 id="demos">Demos</h2>
